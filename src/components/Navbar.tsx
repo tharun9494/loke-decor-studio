@@ -73,7 +73,9 @@ const Navbar = () => {
           }}
           className="relative group"
         >
-          <span className="font-heading text-2xl md:text-[1.6rem] font-bold tracking-wide text-white drop-shadow-lg">
+          <span className={`font-heading text-2xl md:text-[1.6rem] font-bold tracking-wide transition-colors duration-500 ${
+            scrolled ? "text-foreground" : "text-white drop-shadow-lg"
+          }`}>
             Loke{" "}
             <span className="text-gradient-gold">PM</span>{" "}
             Decor
@@ -91,9 +93,13 @@ const Navbar = () => {
                 href={l.href}
                 onClick={(e) => handleClick(e, l.href)}
                 className={`relative font-body text-[13px] font-medium tracking-wide uppercase px-4 py-2 rounded-full transition-all duration-300 ${
-                  isActive
-                    ? "text-white bg-white/10 backdrop-blur-sm"
-                    : "text-white/70 hover:text-white hover:bg-white/5"
+                  scrolled
+                    ? isActive
+                      ? "text-foreground bg-foreground/10"
+                      : "text-foreground/70 hover:text-foreground hover:bg-foreground/5"
+                    : isActive
+                      ? "text-white bg-white/10 backdrop-blur-sm"
+                      : "text-white/70 hover:text-white hover:bg-white/5"
                 }`}
               >
                 {l.label}
@@ -131,7 +137,11 @@ const Navbar = () => {
 
           <button
             onClick={() => setOpen(!open)}
-            className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-colors"
+            className={`lg:hidden flex items-center justify-center w-10 h-10 rounded-full backdrop-blur-sm transition-colors ${
+              scrolled
+                ? "bg-foreground/10 text-foreground hover:bg-foreground/20"
+                : "bg-white/10 text-white hover:bg-white/20"
+            }`}
             aria-label="Toggle menu"
           >
             <AnimatePresence mode="wait">
